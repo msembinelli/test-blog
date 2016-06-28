@@ -27,6 +27,6 @@ app.get('/', function(req, res){
 })
 
 app.use(express.static(__dirname + '/public'));
-app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+app.use(errorHandler({ dumpExceptions: true, showStack: true }));
 
 app.listen(3000);
