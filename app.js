@@ -11,10 +11,7 @@ app.set('view engine', 'jade');
 app.use(bodyParser.json());
 app.use(methodOverride());
 app.use(require('stylus').middleware({ src: __dirname + '/public' }));
-app.use(app.router);
-app.use(express.static(__dirname + '/public'));
 
-app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 
 /*app.configure('production', function(){
   app.use(express.errorHandler());
@@ -27,5 +24,8 @@ app.get('/', function(req, res){
       res.send(docs);
   });
 })
+
+app.use(express.static(__dirname + '/public'));
+app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 
 app.listen(3000);
