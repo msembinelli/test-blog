@@ -3,10 +3,11 @@ var express = require('express');
 var ArticleProvider = require('./articleprovider-memory').ArticleProvider;
 
 var app = express();
+var bodyParser = require('body-parser')
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
-app.use(express.bodyParser());
+app.use(bodyParser.json());
 app.use(express.methodOverride());
 app.use(require('stylus').middleware({ src: __dirname + '/public' }));
 app.use(app.router);
