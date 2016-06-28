@@ -5,6 +5,7 @@ var ArticleProvider = require('./articleprovider-memory').ArticleProvider;
 var app = express();
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
+var errorHandler = require('errorhandler');
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
