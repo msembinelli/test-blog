@@ -21,10 +21,14 @@ app.use(require('stylus').middleware({ src: __dirname + '/public' }));
 var articleProvider= new ArticleProvider();
 
 app.get('/', function(req, res){
-  articleProvider.findAll(function(error, docs){
-      res.send(docs);
-  });
-})
+    articleProvider.findAll( function(error,docs){
+        res.render('index.jade', { locals: {
+            title: 'Blog',
+            articles:docs
+            }
+        });
+    })
+});
 
 app.use(express.static(__dirname + '/public'));
 app.use(errorHandler({ dumpExceptions: true, showStack: true }));
