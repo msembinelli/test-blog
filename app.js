@@ -1,6 +1,7 @@
 // Module dependencies.
 var express = require('express');
-var ArticleProvider = require('./articleprovider-memory').ArticleProvider;
+//var ArticleProvider = require('./articleprovider-memory').ArticleProvider;
+var ArticleProvider = require('./articleprovider-mongodb').ArticleProvider;
 
 var app = express();
 var bodyParser = require('body-parser');
@@ -19,7 +20,7 @@ app.use(require('stylus').middleware({ src: __dirname + '/public' }));
   app.use(express.errorHandler());
 });*/
 
-var articleProvider= new ArticleProvider();
+var articleProvider= new ArticleProvider('localhost', 27017);
 
 app.get('/', function(req, res){
     articleProvider.findAll( function(error,docs){
@@ -44,6 +45,27 @@ app.post('/blog/new', function(req, res){
     }, function( error, docs) {
         res.redirect('/')
     });
+});
+
+app.get('/blog/:id', function(req, res) {
+    articleProvider.findById(req.params.id, function(error, article) {
+        res.render('blog_show.jade',
+        { locals: {
+            title: article.title,
+            article:article
+        }
+        });
+    });
+});
+
+app.post('/blog/addComment', function(req, res) {
+    articleProvider.addCommentToArticle(req.param('_id'), {
+        person: req.param('person'),
+        comment: req.param('comment'),
+        created_at: new Date()
+       } , function( error, docs) {
+           res.redirect('/blog/' + req.param('_id'))
+       });
 });
 
 app.use(express.static(__dirname + '/public'));
