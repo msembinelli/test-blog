@@ -9,5 +9,5 @@ Run Instructions
 npm install -d
 ```
 ```
-nodejs app.js
+mongod & nodejs app.js
 ```
