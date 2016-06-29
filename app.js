@@ -50,10 +50,9 @@ app.post('/blog/new', function(req, res){
 app.get('/blog/:id', function(req, res) {
     articleProvider.findById(req.params.id, function(error, article) {
         res.render('blog_show.jade',
-        { locals: {
+        {
             title: article.title,
             article:article
-        }
         });
     });
 });
