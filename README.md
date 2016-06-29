@@ -5,6 +5,9 @@ This guide was written for an older version of expressjs, so this repo will also
 
 Run Instructions
 
+```
 npm install -d
-
+```
+```
 nodejs app.js
+```
