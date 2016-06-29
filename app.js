@@ -10,6 +10,7 @@ var errorHandler = require('errorhandler');
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride());
 app.use(require('stylus').middleware({ src: __dirname + '/public' }));
 
@@ -30,13 +31,14 @@ app.get('/', function(req, res){
 });
 
 app.get('/blog/new', function(req, res) {
-    res.render('blog_new.jade', {
+    res.render('blog_new.jade', { locals: {
         title: 'New Post'
+        }
     });
 });
 
 app.post('/blog/new', function(req, res){
-    articleProvider.save({
+     articleProvider.save({
         title: req.param('title'),
         body: req.param('body')
     }, function( error, docs) {
