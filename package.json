@@ -7,6 +7,9 @@
   },
   "dependencies": {
     "express": "~4.0.0",
+    "express-session": "^1.13.0",
+    "method-override": "^2.3.6",
+    "errorhandler": "^1.4.3",
     "static-favicon": "~1.0.0",
     "morgan": "~1.0.0",
     "cookie-parser": "~1.0.1",
