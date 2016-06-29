@@ -15,11 +15,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride());
 app.use(require('stylus').middleware({ src: __dirname + '/public' }));
 
-
-/*app.configure('production', function(){
-  app.use(express.errorHandler());
-});*/
-
 var articleProvider= new ArticleProvider('localhost', 27017);
 
 app.get('/', function(req, res){
@@ -65,17 +60,6 @@ app.post('/blog/addComment', function(req, res) {
        } , function( error, docs) {
            res.redirect('/blog/' + req.param('_id'))
        });
-});
-
-app.get('/blog/:id', function(req, res) {
-    articleProvider.findById(req.params.id, function(error, article) {
-        res.render('blog_show.jade',
-        { locals: {
-            title: article.title,
-            article:article
-        }
-        });
-    });
 });
 
 app.use(express.static(__dirname + '/public'));
