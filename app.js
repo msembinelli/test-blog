@@ -22,11 +22,26 @@ var articleProvider= new ArticleProvider();
 
 app.get('/', function(req, res){
     articleProvider.findAll( function(error,docs){
-        res.render('index.jade', { 
+        res.render('index.jade', {
             title: 'Blog',
             articles:docs
         });
     })
+});
+
+app.get('/blog/new', function(req, res) {
+    res.render('blog_new.jade', {
+        title: 'New Post'
+    });
+});
+
+app.post('/blog/new', function(req, res){
+    articleProvider.save({
+        title: req.param('title'),
+        body: req.param('body')
+    }, function( error, docs) {
+        res.redirect('/')
+    });
 });
 
 app.use(express.static(__dirname + '/public'));
