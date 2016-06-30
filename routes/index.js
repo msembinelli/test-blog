@@ -20,7 +20,7 @@ module.exports = function(passport){
   });
 
   /* Handle Login POST */
-  router.post('/admin', passport.authenticate('login', {
+  router.post('/login', passport.authenticate('login', {
     successRedirect: '/blog/new',
     failureRedirect: '/admin',
     failureFlash : true
