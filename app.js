@@ -8,7 +8,7 @@ var methodOverride = require('method-override');
 var errorHandler = require('errorhandler');
 
 app.set('views', __dirname + '/views');
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride());
@@ -18,7 +18,7 @@ var articleProvider= new ArticleProvider('localhost', 27017);
 
 app.get('/', function(req, res){
     articleProvider.findAll( function(error,docs){
-        res.render('index.jade', {
+        res.render('index.pug', {
             title: 'Blog',
             articles:docs
         });
@@ -26,7 +26,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/blog/new', function(req, res) {
-    res.render('blog_new.jade', { locals: {
+    res.render('blog_new.pug', { locals: {
         title: 'New Post'
         }
     });
@@ -43,7 +43,7 @@ app.post('/blog/new', function(req, res){
 
 app.get('/blog/:id', function(req, res) {
     articleProvider.findById(req.params.id, function(error, article) {
-        res.render('blog_show.jade',
+        res.render('blog_show.pug',
         {
             title: article.title,
             article:article
@@ -64,4 +64,4 @@ app.post('/blog/addComment', function(req, res) {
 app.use(express.static(__dirname + '/public'));
 app.use(errorHandler({ dumpExceptions: true, showStack: true }));
 
-app.listen(3000);
+module.exports = app;
