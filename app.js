@@ -1,6 +1,5 @@
 // Module dependencies.
 var express = require('express');
-//var ArticleProvider = require('./articleprovider-memory').ArticleProvider;
 var ArticleProvider = require('./articleprovider-mongodb').ArticleProvider;
 
 var app = express();
